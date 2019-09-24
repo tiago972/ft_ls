@@ -6,5 +6,8 @@
 # define REC (1 << 2)
 # define R (1 << 3)
 # define T (1 << 4)
+#include <sys/types.h>
+#include <dirent.h>
+
 #include <stdio.h>
 #endif
