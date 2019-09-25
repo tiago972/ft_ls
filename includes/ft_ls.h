@@ -7,7 +7,14 @@
 # define R (1 << 3)
 # define T (1 << 4)
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <dirent.h>
-
+typedef struct	s_file
+{
+	int		folder;
+	char*	name;
+	int		access;
+}				t_file;
 #include <stdio.h>
 #endif
