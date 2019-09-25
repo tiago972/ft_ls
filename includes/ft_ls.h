@@ -10,11 +10,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
-typedef struct	s_file
-{
-	int		folder;
-	char*	name;
-	int		access;
-}				t_file;
+int		ft_parse_opt(int ac, char **av, int *opt);
+
 #include <stdio.h>
 #endif
