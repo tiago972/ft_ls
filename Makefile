@@ -4,7 +4,7 @@ NAME = ft_ls
 OBJDIR = objs
 SRCDIR = ./srcs
 SRC = main.c \
-	parse_opt.c
+	add_file.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
