@@ -10,6 +10,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
+#include "../libft/includes/libft.h"
+#include "../libft/ft_printf/includes/ft_printf.h"
+
 int		ft_parse_opt(int ac, char **av, int *opt);
 
 #include <stdio.h>

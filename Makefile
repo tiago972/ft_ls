@@ -4,22 +4,17 @@ NAME = ft_ls
 OBJDIR = objs
 SRCDIR = ./srcs
 SRC = main.c \
-	  parse_opt.c
+	parse_opt.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
-DEBUG = test
-CLFLAGS_DEBUG = -g3 -I $(INCL)
-DEBUG_FOLDER = ./debug
-DEBUG_SRC = $(addprefix $(DEBUG_FOLDER)/, main.c)
-DEBUG_OBJS_FOLDER = $(addprefix $(DEBUG_FOLDER)/, objs)
-DEBUG_OBJ = $(addprefix $(DEBUG_OBJS_FOLDER)/, $(addsuffix .o, $(basename $(notdir $(DEBUG_SRC)))))
+include libft/Makefile_lib
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(FLAGS) -o $@ $^ 
+$(NAME): $(OBJ) $(OBJ_LIB)
+	@$(CC) $(CFLAGS) -I $(INCL) $(LIBCREATOR) -o $@ $^
 	@echo "\n\033[38;5;4;1;4m$(NAME)\033[0m compiled successfully\n" 
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c  
@@ -41,20 +36,4 @@ fclean_all: fclean_lib fclean
 
 re_all: fclean_lib re
 
-$(DEBUG): $(DEBUG_OBJ) $(NAME)
-	@$(CC) $(CLFLAGS_DEBUG) -o $@ $(DEBUG_OBJ) $(OBJ) $(OBJ_LIB)
-	@echo "\n\033[38;5;208m READY to debug bro\033[0m\n"
-
-$(DEBUG_OBJS_FOLDER)/%.o: $(DEBUG_SRC)
-	@mkdir -p $(DEBUG_OBJS_FOLDER)
-	@$(CC) $(CLFLAGS_DEBUG) -o $@ -c $<
-
-clean_deb:
-	@rm -f $(DEBUG_OBJ)
-
-fclean_deb: clean_deb
-	@rm -f $(DEBUG)
-
-re_debug: fclean_deb $(DEBUG)
-
-.PHONY: clean fclean all clean_deb fclean_deb re_debug
+.PHONY: clean fclean all
