@@ -3,21 +3,18 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCL)
 NAME = ft_ls
 OBJDIR = objs
 SRCDIR = ./srcs
-SRC = main.c \
-	add_file.c
+SRC = main.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
 include libft/Makefile_lib
 
-all: $(NAME)
+$(NAME): $(OBJ) $(NAME_LIB)
+	@$(CC) $(CFLAGS) -I $(INCL) $(NAME_LIB) -o $@ $<
+	@echo "\n\033[38;5;208m$(NAME)\033[0m is ready to amazed you\n" 
 
-$(NAME): $(OBJ) $(OBJ_LIB)
-	@$(CC) $(CFLAGS) -I $(INCL) $(LIBCREATOR) -o $@ $^
-	@echo "\n\033[38;5;4;1;4m$(NAME)\033[0m compiled successfully\n" 
-
-$(OBJDIR)/%.o : $(SRCDIR)/%.c  
+$(OBJDIR)/%.o: $(SRCDIR)/%.c  
 	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS) 
 	@echo "\033[38;5;82m$@\033[0m has been created" 

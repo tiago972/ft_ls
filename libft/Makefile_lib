@@ -49,10 +49,13 @@ OBJDIR_PRINTF = $(LIB_DIR)/ft_printf/objs
 OBJ_PRINTF = $(addprefix $(OBJDIR_PRINTF)/, $(addsuffix .o, $(basename $(SRC_PRINTF))))
 INC_PRINTF = -I ft_printf/includes/ft_printf.h
 
+all: $(NAME)
+all_lib: $(LIB_NAME)
+
 $(NAME_LIB): $(OBJ_LIB) $(OBJ_PRINTF)
-	@ar rc $(NAME) $^ 
-	@ranlib $(NAME)
-	@echo "\n\033[38;5;4;1;4m$(NAME)\033[0m compiled successfully\n"
+	@ar rc $(NAME_LIB) $^ 
+	@ranlib $(NAME_LIB)
+	@echo "\n\033[38;5;4;1;4m$(NAME_LIB)\033[0m compiled successfully\n"
 
 $(OBJDIR_LIB)/%.o : $(SRCDIR_LIB)/%.c
 	@mkdir -p $(OBJDIR_LIB)
@@ -66,8 +69,9 @@ $(OBJDIR_PRINTF)/%.o : $(SRC_PRINTF_DIR)/%.c
 
 clean_lib: 
 	@rm -rf $(OBJDIR_LIB)
-	@rm -rf $(OBJDIR_PRINTF)
 	@echo "\033[38;5;208m$(OBJDIR_LIB)\033[0m has been deleted" 
+	@rm -rf $(OBJDIR_PRINTF)
+	@echo "\033[38;5;208m$(OBJDIR_PRINTF)\033[0m has been deleted" 
 
 fclean_lib: clean_lib
 	@rm -rf $(NAME_LIB)

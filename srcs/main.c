@@ -1,49 +1,60 @@
 #include "../includes/ft_ls.h"
 
-int		ft_parse_opt(int ac, char **av, int *opt)
-{
-	int		tmp;
-	int		i;
-	int		j;
 
-	i = 1;
-	j = 0;
-	while (i < ac)
+static char *ft_test_parse(char *name)
+{
+	char	tmp;
+	int		i;
+
+	tmp = 0;
+	i = 0;
+	while (name[i + 1])
 	{
-		if (av[i][0] != '-')
-			return ;
-		while (av[i][j] && (tmp = ft_strlen_c("alRt", av[i][j])) > -1)
-		{
-			*opt |= (1 << tmp);
-			j++;
-		}
+		tmp = name[i];
+		name[i] = name[i + 1];
+		name[i + 1] = tmp;
 		i++;
 	}
-	return (i);
-}
-
-void	ft_init(char **av, t_list **begin_list, int ac, int first)
-{
-	t_ls	*files;
-
-	if (!av)
-		ft_add_file(".", begin_list);
-	while (first < ac)
-		ft_add_file(av[first++], begin_list);
+	name[i + ft_strlen(name) - 2] = '\0';
+	return (name);
 }
 
 int		main(int ac, char **av)
 {
-	int		opt;
-	t_list	*begin_list;
-	int		first;
-	t_ls	files;
+	int	i;
+	struct dirent	*dir_read;
+	DIR				*dir_open;
+	struct stat		stat_file;
+	char			*name;
 
-	*begin_list = NULL;
-	opt = 0;
-	first = 1;
-	if (ac > 1)
-		first = ft_parse_opt(ac, av, &opt);
-	ft_init(av, &begin_list, ac, first);
+	i = 1;
+	if (ac == 1)
+	{
+		ft_printf("fuck\n");
+		return (1);
+	}
+	while (i < ac)
+	{
+		name = ft_strnew(256);
+		stat(av[i], &stat_file);
+		stat_file.st_mode &= S_IFMT;
+		if (stat_file.st_mode & S_IFDIR)
+		{
+			while (stat_file.st_mode & S_IFDIR)
+			{
+				dir_open = opendir(av[i]);
+				while ((dir_read = readdir(dir_open)) != NULL)
+				{
+					name = dir_read->d_name;
+					name = ft_test_parse(name);
+					ft_printf("%s\n", name);
+				}
+				closedir(dir_open);
+			}
+		}
+		else 
+			ft_printf("??\n");
+		i++;
+	}
 	return (0);
 }
