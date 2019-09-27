@@ -1,5 +1,5 @@
 CC = gcc 
-CFLAGS = -Wall -Wextra -Werror -I $(INCL)
+CFLAGS = -Wall -Wextra -Werror
 NAME = ft_ls
 OBJDIR = objs
 SRCDIR = ./srcs
