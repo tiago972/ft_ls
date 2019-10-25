@@ -13,16 +13,16 @@
 #include "../includes/ft_printf.h"
 #include "../../includes/libft.h"
 
-static void		ft_flush(t_printf *v_printf)
+void		ft_flush(t_printf *v_printf)
 {
 	if (v_printf->col > 0)
 		ft_printcol(v_printf);
-	write(1, v_printf->buff, v_printf->ret_progress);
+	write(v_printf->fd, v_printf->buff, v_printf->ret_progress);
 	ft_bzero(&(v_printf->buff), BUFF_SIZE);
 	v_printf->ret_tot += v_printf->ret_progress;
 	v_printf->ret_progress = 0;
 	if (v_printf->col > 0)
-		write(1, "\033[m", 3);
+		write(v_printf->fd, "\033[m", 3);
 }
 
 void			ft_buff(t_printf *v_printf, char *str, int n)
@@ -55,6 +55,7 @@ static void		ft_reinit_struct(t_printf *v_printf)
 	v_printf->tmp = 0;
 	v_printf->power = 0;
 	v_printf->col = 0;
+	v_printf->fd = 1;
 }
 
 void			ft_begin(t_printf *v_printf, const char *str,

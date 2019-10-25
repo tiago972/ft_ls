@@ -14,16 +14,19 @@
 #include "../libft/ft_printf/includes/ft_printf.h"
 #include <errno.h>
 #include <limits.h>
+#include <time.h>
+#include <stdlib.h>
 
 typedef struct		s_ls
 {
 	char			full_path[PATH_MAX];
-	struct stat		t_stat;
+	char			*name;
+	mode_t			st_mode;
+	uid_t			st_uid;
+	gid_t			st_gid;
+
 }					t_ls;
 
-void	ft_add_file(t_list **begin_list, char *path, char *name);
-int		ft_get_full_path(char *path, char *name, char full_path[PATH_MAX]);
-t_ls	*ft_initialize(t_list **begin_list, char *path, char *name);
+int					ft_parse_opt(int ac, char **av);
 
-#include <stdio.h>
 #endif

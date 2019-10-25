@@ -64,6 +64,7 @@ typedef struct	s_printf
 	int				tmp;
 	uintmax_t		power;
 	int				col;
+	int				fd;
 }				t_printf;
 
 typedef struct	s_float
@@ -92,6 +93,7 @@ typedef struct	s_col
 }				t_col;
 
 int				ft_printf(const char *str, ...);
+void			ft_flush(t_printf *v_printf);
 void			ft_begin(t_printf *v_printf, const char *str,
 				t_funptr funptr[14]);
 void			ft_buff(t_printf *v_printf, char *str, int n);
@@ -161,5 +163,6 @@ void			*ft_malloc_tmp(t_printf *v_printf);
 unsigned		ft_i_size_i(t_printf *v_printf);
 int				ft_begin_f(t_float *f, t_printf *v);
 void			ft_if_f(t_float *f, t_printf *v_printf, int opt);
+int				ft_printf_fd(int fd, const char *str, ...);
 
 #endif

@@ -3,9 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = ft_ls
 OBJDIR = objs
 SRCDIR = ./srcs
-SRC = main.c \
-	  add.c \
-	  initialize.c
+SRC = main.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
