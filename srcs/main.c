@@ -2,9 +2,14 @@
 
 int		main(int ac, char **av)
 {
-	/*
-	if (!ft_parse_opt(ac, av))
-		exit(EXIT_FAILURE);*/
-	ft_printf_fd(2, "%s", av[ac - 1]);
+	int		opt;
+
+	opt = 0;
+	if (ac == 1)
+		return (EXIT_FAILURE);
+	av++;
+	ft_parse_opt(ac, av, &opt);
+	ft_printf("opt = %bd\n", opt);
 	//if (ac == 1)
+	return (0);
 }

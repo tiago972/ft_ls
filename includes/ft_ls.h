@@ -1,11 +1,11 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# define A (1 << 0)
+# define A_LS (1 << 0)
 # define L_LS (1 << 1)
-# define REC (1 << 2)
-# define R (1 << 3)
-# define T (1 << 4)
+# define REC_LS (1 << 2)
+# define R_LS (1 << 3)
+# define T_LS (1 << 4)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -27,6 +27,8 @@ typedef struct		s_ls
 
 }					t_ls;
 
-int					ft_parse_opt(int ac, char **av);
+enum				{USAGE, ERRNO};
+void				ft_parse_opt(int ac, char **av, int *opt);
 
+void				ft_ls_error(char *str, int error);
 #endif
