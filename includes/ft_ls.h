@@ -17,18 +17,23 @@
 #include <time.h>
 #include <stdlib.h>
 
-typedef struct		s_ls
+typedef struct			s_ls
 {
-	char			full_path[PATH_MAX];
+	char			*full_path;
 	char			*name;
 	mode_t			st_mode;
 	uid_t			st_uid;
 	gid_t			st_gid;
 
-}					t_ls;
+}						t_ls;
 
-enum				{USAGE, ERRNO};
-void				ft_parse_opt(int ac, char **av, int *opt);
+typedef struct	stat	t_stat;
+enum					{USAGE, ERRNO};
+int						ft_parse_opt(int ac, char **av, int *opt);
+void					ft_add_to_list(t_list **begin_list, char *name, char *path);
 
-void				ft_ls_error(char *str, int error);
+void					ft_ls_error(char *str, int error);
+
+
+void	ft_debog(t_list **begin_list);
 #endif

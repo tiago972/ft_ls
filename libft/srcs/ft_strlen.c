@@ -16,6 +16,8 @@ size_t	ft_strlen(char *str)
 {
 	char	*cpy;
 
+	if (!str)
+		return (0);
 	cpy = str;
 	while (*cpy)
 		cpy++;

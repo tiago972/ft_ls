@@ -1,12 +1,12 @@
 #include "../includes/ft_ls.h"
 
-void		ft_parse_opt(int ac, char **av, int *opt)
+int			ft_parse_opt(int ac, char **av, int *opt)
 {
 	int		tmp;
 
 	tmp = 0;
 	if (**av != '-')
-		return ;
+		return (0) ;
 	else
 		(*av)++;
 	while (**av && (tmp = ft_strlen_c("alrRt", **av)) > -1)
@@ -18,5 +18,6 @@ void		ft_parse_opt(int ac, char **av, int *opt)
 		ft_ls_error(*av, USAGE);
 	if (ac > 2 && av++)
 		if (**av == '-')
-			ft_parse_opt(--ac, av, opt);
+			return (1 + ft_parse_opt(--ac, av, opt));
+	return (1);
 }
