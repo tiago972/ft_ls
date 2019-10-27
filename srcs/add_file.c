@@ -48,11 +48,11 @@ static void		ft_init_struct(t_ls *file, char *name)
 	file->st_mode = v_stat.st_mode;
 	file->st_uid = v_stat.st_uid;
 	file->st_gid = v_stat.st_gid;
-	file->st_size = v_stat.s_size;
+	file->st_size = v_stat.st_size;
 	file->st_rdev = v_stat.st_rdev;
-	file->st_mtimespec = v_stat.st_mtimepec;
-	file->st_nlink = v_stat.st_link;
-	file->st_blocks = v_stat.st_block;
+	file->st_mtimespec = v_stat.st_mtimespec.tv_sec;
+	file->st_nlink = v_stat.st_nlink;
+	file->st_blocks = v_stat.st_blocks;
 }
 
 void			ft_add_to_list(t_list **begin_list, char *name, char *path)

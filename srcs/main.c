@@ -18,7 +18,7 @@ int		main(int ac, char **av)
 		ft_add_to_list(&begin_list, *av, "");
 		av++;
 	}
-	ft_dispatch_opening(begin_list, opt);
-	ft_debog(&begin_list);
+	ft_dispatch_opening(&begin_list, opt);
+	//ft_debog(&begin_list);
 	return (errno == EXIT_SUCCESS ? EXIT_SUCCESS : EXIT_FAILURE);
 }

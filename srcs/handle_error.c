@@ -10,9 +10,9 @@ void	ft_ls_error(char *str, int error)
 	}
 	else if (error == ERRNO)
 	{
-		if (s)
-			ft_printf_fd(2, "ft_ls: %s: %s\n", s, strreror(errno));
+		if (str)
+			ft_printf_fd(2, "ft_ls: %s: %s\n", str, strerror(errno));
 		else
-			ft_printf_fd(2, "ft_ls: %s\n", strreror(errno));
+			ft_printf_fd(2, "ft_ls: %s\n", strerror(errno));
 	}	
 }

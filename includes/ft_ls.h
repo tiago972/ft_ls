@@ -38,7 +38,8 @@ enum					{USAGE, ERRNO};
 int						ft_parse_opt(int ac, char **av, int *opt);
 void					ft_add_to_list(t_list **begin_list,
 						char *name, char *path);
-void					ft_dispath_opening(t_list **begin_list, int opt);
+void					ft_dispatch_opening(t_list **begin_list, int opt);
+void					ft_rec_opening(t_list **begin_list, int opt);
 void					ft_ls_error(char *str, int error);
 
 
