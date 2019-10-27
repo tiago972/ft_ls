@@ -16,6 +16,7 @@
 #include <limits.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct			s_ls
 {
@@ -24,14 +25,20 @@ typedef struct			s_ls
 	mode_t			st_mode;
 	uid_t			st_uid;
 	gid_t			st_gid;
-
+	off_t			st_size;
+	dev_t			st_rdev;
+	time_t			st_mtimespec;
+	nlink_t			st_nlink;
+	blkcnt_t		st_blocks;
 }						t_ls;
 
 typedef struct	stat	t_stat;
+
 enum					{USAGE, ERRNO};
 int						ft_parse_opt(int ac, char **av, int *opt);
-void					ft_add_to_list(t_list **begin_list, char *name, char *path);
-
+void					ft_add_to_list(t_list **begin_list,
+						char *name, char *path);
+void					ft_dispath_opening(t_list **begin_list, int opt);
 void					ft_ls_error(char *str, int error);
 
 

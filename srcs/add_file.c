@@ -20,12 +20,13 @@ static int		ft_get_full_path(t_ls *file, char *path, char *name)
 		errno = ENAMETOOLONG;
 		return (0);
 	}
-	if (name[0] == '.')
+	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
 		return (ft_dot_path(file, name));
 	if (!(tmp = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1)))
 		return (0);
 	(!*path) ? ft_memcpy(tmp, ".", 1) : ft_memcpy(tmp, path, ft_strlen(path));
-	ft_strcat(tmp, "/");
+	if (ft_strcmp(name, "/") != 0)
+		ft_strcat(tmp, "/");
 	ft_strcat(tmp, name);
 	if (!(file->full_path = ft_strdup(tmp)))
 	{
@@ -44,7 +45,14 @@ static void		ft_init_struct(t_ls *file, char *name)
 		ft_ls_error(NULL, ERRNO);
 	if (lstat(file->full_path, &v_stat) == -1)
 		ft_ls_error(name, ERRNO);
+	file->st_mode = v_stat.st_mode;
 	file->st_uid = v_stat.st_uid;
+	file->st_gid = v_stat.st_gid;
+	file->st_size = v_stat.s_size;
+	file->st_rdev = v_stat.st_rdev;
+	file->st_mtimespec = v_stat.st_mtimepec;
+	file->st_nlink = v_stat.st_link;
+	file->st_blocks = v_stat.st_block;
 }
 
 void			ft_add_to_list(t_list **begin_list, char *name, char *path)

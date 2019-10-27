@@ -8,5 +8,11 @@ void	ft_ls_error(char *str, int error)
 		ft_printf_fd(2, "usage: ft_ls [-alRrt] [file ...]\n");
 		exit(EXIT_FAILURE);
 	}
-	//cal ft_del, NPO de rajouter begin_list en arg;
+	else if (error == ERRNO)
+	{
+		if (s)
+			ft_printf_fd(2, "ft_ls: %s: %s\n", s, strreror(errno));
+		else
+			ft_printf_fd(2, "ft_ls: %s\n", strreror(errno));
+	}	
 }

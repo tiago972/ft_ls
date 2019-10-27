@@ -7,6 +7,7 @@ SRC = main.c \
 	  parse_opt.c \
 	  handle_error.c \
 	  add_file.c \
+	  add_folders.c \
 	  debog.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))
