@@ -1,13 +1,12 @@
 #include "../includes/ft_ls.h"
 
-static	t_list	*ft_readdir(t_ls *file, int opt, int start)
+static	t_list	*ft_readdir(t_ls *file, int opt)
 {
 	DIR				*o_dir;
 	struct dirent	*dir_file;
 	t_list			*begin_list;
 
 	begin_list = NULL;
-	(void) start;
 	if (!(o_dir = opendir(file->full_path)))
 	{
 		ft_ls_error(file->name, ERRNO);
@@ -43,7 +42,7 @@ void			ft_rec_opening(t_list **begin_list, int opt, int start)
 		if (S_ISDIR(ls_tmp->st_mode) && (start 
 			|| (ft_strcmp(ls_tmp->name, ".") && ft_strcmp(ls_tmp->name, ".."))))
 		{
-			if ((new_folder = ft_readdir(ls_tmp, opt, start)))
+			if ((new_folder = ft_readdir(ls_tmp, opt)))
 			{
 				ft_dispatch_opt(&new_folder, opt);
 				ft_rec_opening(&new_folder, opt, 0);

@@ -7,7 +7,9 @@ void	ft_debog(t_list **begin_list)
 {
 	t_list	*tmp;
 	t_ls	*tmp2;
+	time_t	today;
 
+	time (&today);
 	tmp = *begin_list;
 	while (tmp)
 	{

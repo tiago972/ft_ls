@@ -51,7 +51,7 @@ static void		ft_init_struct(t_ls *file, char *name)
 	file->st_gid = v_stat.st_gid;
 	file->st_size = v_stat.st_size;
 	file->st_rdev = v_stat.st_rdev;
-	file->st_mtimespec = v_stat.st_mtimespec.tv_sec;
+	file->time = v_stat.st_mtimespec.tv_sec;
 	file->st_nlink = v_stat.st_nlink;
 	file->st_blocks = v_stat.st_blocks;
 }
