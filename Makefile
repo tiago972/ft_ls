@@ -10,6 +10,7 @@ SRC = main.c \
 	  add_folders.c \
 	  clean_mem.c \
 	  list_sort.c \
+	  display.c \
 	  debog.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))

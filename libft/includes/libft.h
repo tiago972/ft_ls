@@ -87,5 +87,6 @@ void				*ft_realloc(void *ptr, size_t new_size);
 void				ft_putchar_err(const char c);
 void				ft_putstr_err(const char *s);
 size_t				ft_strlen_c(const char *s, char c);
+size_t				ft_lstcount(t_list **begin_list);
 
 #endif

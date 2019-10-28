@@ -6,6 +6,7 @@
 # define REC_LS (1 << 2)
 # define R_LS (1 << 3)
 # define T_LS (1 << 4)
+# define SIZE_M 85
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -27,7 +28,7 @@ typedef struct			s_ls
 	gid_t			st_gid;
 	off_t			st_size;
 	dev_t			st_rdev;
-	time_t			st_mtimespec;
+	time_t			time;
 	nlink_t			st_nlink;
 	blkcnt_t		st_blocks;
 }						t_ls;
@@ -46,5 +47,8 @@ void					ft_rec_opening(t_list **begin_list, int opt, int start);
 void					ft_sort_ascii(t_list **begin_list, int opt);
 void					ft_sort_time(t_list **begin_list, int opt);
 void					ft_dispatch_opt(t_list **begin_list, int opt);
+int						ft_max_len(t_list **begin_list, int opt);
+void					ft_simple_display(t_list **begin_list, int opt,
+						int max_len);
 void	ft_debog(t_list **begin_list);
 #endif
