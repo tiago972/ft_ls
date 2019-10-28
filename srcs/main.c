@@ -9,16 +9,18 @@ int		main(int ac, char **av)
 	begin_list = NULL;
 	opt = 0;
 	if (ac == 1)
-		return (EXIT_FAILURE);
+		ft_add_to_list(&begin_list, ".", "");
 	else
 		av++;
 	av += ft_parse_opt(ac, av, &opt);
-	while (av && *av)
+	if (ac > 1 && opt > 0)
+		ft_add_to_list(&begin_list, ".", "");
+	while (ac > 1 && *av)
 	{
 		ft_add_to_list(&begin_list, *av, "");
 		av++;
 	}
-	ft_dispatch_opening(&begin_list, opt);
-	//ft_debog(&begin_list);
+	ft_rec_opening(&begin_list, opt, 1);
+	ft_clean_mem(&begin_list);
 	return (errno == EXIT_SUCCESS ? EXIT_SUCCESS : EXIT_FAILURE);
 }

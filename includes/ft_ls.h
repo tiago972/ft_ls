@@ -38,10 +38,13 @@ enum					{USAGE, ERRNO};
 int						ft_parse_opt(int ac, char **av, int *opt);
 void					ft_add_to_list(t_list **begin_list,
 						char *name, char *path);
-void					ft_dispatch_opening(t_list **begin_list, int opt);
-void					ft_rec_opening(t_list **begin_list, int opt);
+void					ft_dispatch_opening(t_list **begin_list, int opt, 
+						int start);
 void					ft_ls_error(char *str, int error);
-
-
+void					ft_clean_mem(t_list **begin_list);
+void					ft_rec_opening(t_list **begin_list, int opt, int start);
+void					ft_sort_ascii(t_list **begin_list, int opt);
+void					ft_sort_time(t_list **begin_list, int opt);
+void					ft_dispatch_opt(t_list **begin_list, int opt);
 void	ft_debog(t_list **begin_list);
 #endif

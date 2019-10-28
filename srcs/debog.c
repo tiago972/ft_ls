@@ -12,7 +12,7 @@ void	ft_debog(t_list **begin_list)
 	while (tmp)
 	{
 		tmp2 = ((t_ls *)tmp->content);
-		ft_printf("name = %s\npath = %s\nUID:%s\n", tmp2->name, tmp2->full_path, getpwuid(tmp2->st_uid)->pw_name);
+		ft_printf("name = %s\n", tmp2->name);
 		tmp = tmp->next;
 	}
 }

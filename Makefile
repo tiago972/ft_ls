@@ -8,6 +8,8 @@ SRC = main.c \
 	  handle_error.c \
 	  add_file.c \
 	  add_folders.c \
+	  clean_mem.c \
+	  list_sort.c \
 	  debog.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))

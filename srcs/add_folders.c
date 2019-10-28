@@ -1,32 +1,55 @@
 #include "../includes/ft_ls.h"
 
-void	ft_dispath_opening(t_list **begin_list, int opt)
+static	t_list	*ft_readdir(t_ls *file, int opt, int start)
 {
-	if (opt & L)
-		ft_rec_opening(begin_list, opt);
-//	else
-//		ft_opening(begin_list, opt);
+	DIR				*o_dir;
+	struct dirent	*dir_file;
+	t_list			*begin_list;
+
+	begin_list = NULL;
+	(void) start;
+	if (!(o_dir = opendir(file->full_path)))
+	{
+		ft_ls_error(file->name, ERRNO);
+		return (NULL);
+	}
+	while ((dir_file = readdir(o_dir)) != NULL)
+	{
+		if (dir_file->d_name[0] != '.')
+			ft_add_to_list(&begin_list, dir_file->d_name, file->full_path);
+		else if (dir_file->d_name[0] == '.' && (opt & A_LS)
+				&& ft_strcmp(dir_file->d_name, ".") != 0)
+			ft_add_to_list(&begin_list, dir_file->d_name, file->full_path);
+	}
+	closedir(o_dir);
+	return (begin_list);
 }
 
-static void		ft_rec_opening(t_list **begin_list, int opt)
+void			ft_rec_opening(t_list **begin_list, int opt, int start)
 {
-	t_list		*l_tmp;
+	t_list		*list_tmp;
 	t_ls		*ls_tmp;
+	t_list		*new_folder;
 
-	(void)opt;
-	l_tmp = *begin_list;
-	while (l_tmp)
+	list_tmp = *begin_list;
+	new_folder = NULL;
+	if (!start && !(opt & REC_LS))
+		return ;
+	if (start)
+		ft_dispatch_opt(begin_list, opt);
+	while (list_tmp)
 	{
-		ls_tmp = (t_ls *)l_tmp->content;
-		if (S_ISDIR(ls_tmp->st_mode))
+		ls_tmp = (t_ls *)list_tmp->content;
+		if (S_ISDIR(ls_tmp->st_mode) && (start 
+			|| (ft_strcmp(ls_tmp->name, ".") && ft_strcmp(ls_tmp->name, ".."))))
 		{
-			l_tmp = ft_readdir(l_tmp, ls_tmp);
-			ft_debog(&l_tmp);
-			ft_rec_opening(&l_tmp, opt);
-			//ft_clean_mem(&l_tmp);
+			if ((new_folder = ft_readdir(ls_tmp, opt, start)))
+			{
+				ft_dispatch_opt(&new_folder, opt);
+				ft_rec_opening(&new_folder, opt, 0);
+				ft_clean_mem(&new_folder);
+			}
 		}
-	//	else
-	//		ft_printf("not dir: name = %s\n", ls_tmp->name);
-		l_tmp = l_tmp->next;
+		list_tmp = list_tmp->next;
 	}
 }

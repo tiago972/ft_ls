@@ -3,10 +3,10 @@
 static int		ft_dot_path(t_ls *file, char *name)
 {
 	if (ft_strcmp(name, ".") == 0)
-		if (!(file->full_path = ft_strdup("./")))
+		if (!(file->full_path = ft_strdup(".")))
 			return (0);
 	if (ft_strcmp(name, "..") == 0)
-		if (!(file->full_path = ft_strdup("../")))
+		if (!(file->full_path = ft_strdup("..")))
 			return (0);
 	return (1);
 }
@@ -41,6 +41,7 @@ static void		ft_init_struct(t_ls *file, char *name)
 {
 	t_stat		v_stat;
 
+	ft_memset(&v_stat, 0, sizeof(t_stat));
 	if (!(file->name = ft_strdup(name)))
 		ft_ls_error(NULL, ERRNO);
 	if (lstat(file->full_path, &v_stat) == -1)
