@@ -69,7 +69,7 @@ void		ft_full_display(t_list **begin_list)
 	while (list_tmp)
 	{
 		ls_tmp = (t_ls *)list_tmp->content;
-		ft_type();
+		/*ft_type();
 		ft_rights();
 		ft_acl();
 		ft_nbfile();
@@ -77,7 +77,7 @@ void		ft_full_display(t_list **begin_list)
 		ft_gid();
 		ft_size();
 		ft_time();
-		ft_name();
+		ft_name();*/
 		list_tmp = list_tmp->next;
 	}
 }
