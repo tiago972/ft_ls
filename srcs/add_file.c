@@ -8,6 +8,10 @@ static int		ft_dot_path(t_ls *file, char *name)
 	if (ft_strcmp(name, "..") == 0)
 		if (!(file->full_path = ft_strdup("..")))
 			return (0);
+	if (ft_strcmp(name, "/") == 0)
+		if (!(file->full_path = ft_strdup("/")))
+			return (0);
+
 	return (1);
 }
 
@@ -20,7 +24,8 @@ static int		ft_get_full_path(t_ls *file, char *path, char *name)
 		errno = ENAMETOOLONG;
 		return (0);
 	}
-	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
+	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0
+			|| ft_strcmp(name, "/") == 0)
 		return (ft_dot_path(file, name));
 	if (!(tmp = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1)))
 		return (0);

@@ -50,5 +50,6 @@ void					ft_dispatch_opt(t_list **begin_list, int opt);
 int						ft_max_len(t_list **begin_list, int opt);
 void					ft_simple_display(t_list **begin_list, int opt,
 						int max_len);
+void					ft_full_display(t_list **begin_list);
 void	ft_debog(t_list **begin_list);
 #endif

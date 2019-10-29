@@ -8,12 +8,14 @@ int		main(int ac, char **av)
 	errno = EXIT_SUCCESS;
 	begin_list = NULL;
 	opt = 0;
+	// debog
+		opt |= L_LS;
 	if (ac == 1)
 		ft_add_to_list(&begin_list, ".", "");
 	else
 		av++;
 	av += ft_parse_opt(ac, av, &opt);
-	if (ac > 1 && opt > 0)
+	if (ac > 1 && !(*av))
 		ft_add_to_list(&begin_list, ".", "");
 	while (ac > 1 && *av)
 	{
