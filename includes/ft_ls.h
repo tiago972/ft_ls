@@ -53,5 +53,8 @@ void					ft_simple_display(t_list **begin_list, int opt,
 void					ft_full_display(t_list **begin_list);
 void					ft_print_path(char *begin_list, int opt,
 						int start);
+void					ft_type(t_ls *file);
+void					ft_rights(t_ls *file);
+void					ft_link_ug_size_time_name(t_ls *file);
 void	ft_debog(t_list **begin_list);
 #endif

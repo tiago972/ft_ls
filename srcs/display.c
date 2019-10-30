@@ -79,10 +79,9 @@ void		ft_full_display(t_list **begin_list)
 	while (list_tmp)
 	{
 		ls_tmp = (t_ls *)list_tmp->content;
-		/*ft_type();
-		ft_rights();
-		ft_acl();
-		ft_nbfile();
+		ft_type(ls_tmp);
+		ft_rights(ls_tmp);
+		ft_link_ug_size_time_name(ls_tmp);/*
 		ft_uid();
 		ft_gid();
 		ft_size();
