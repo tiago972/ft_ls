@@ -1,5 +1,14 @@
 #include "../includes/ft_ls.h"
 
+void		ft_print_path(char *path, int opt, int start)
+{
+	if (opt & REC_LS)
+	{
+		if (!start)
+			ft_printf("\n%s:\n", path);
+	}
+}
+
 int			ft_max_len(t_list **begin_list, int opt)
 {
 	t_list	*list_tmp;
@@ -35,8 +44,9 @@ void		ft_simple_display(t_list **begin_list, int opt, int max_len)
 			list_tmp = list_tmp->next;
 		if (!list_tmp)
 			break ;
-		ft_printf("%-*s", max_len, ls_tmp->name);
-		if ((max_len * ft_lstcount(begin_list)) > SIZE_M && list_tmp->next)
+		ft_printf("%-*s ", max_len, ls_tmp->name);
+		if ((((max_len * ft_lstcount(begin_list)) > SIZE_M))
+				&& list_tmp->next)
 			ft_putchar('\n');
 		list_tmp = list_tmp->next;
 		if (!list_tmp)

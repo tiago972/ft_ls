@@ -2,16 +2,13 @@
 
 static int		ft_dot_path(t_ls *file, char *name)
 {
+
 	if (ft_strcmp(name, ".") == 0)
 		if (!(file->full_path = ft_strdup(".")))
 			return (0);
 	if (ft_strcmp(name, "..") == 0)
 		if (!(file->full_path = ft_strdup("..")))
 			return (0);
-	if (ft_strcmp(name, "/") == 0)
-		if (!(file->full_path = ft_strdup("/")))
-			return (0);
-
 	return (1);
 }
 
@@ -24,13 +21,12 @@ static int		ft_get_full_path(t_ls *file, char *path, char *name)
 		errno = ENAMETOOLONG;
 		return (0);
 	}
-	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0
-			|| ft_strcmp(name, "/") == 0)
+	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
 		return (ft_dot_path(file, name));
 	if (!(tmp = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1)))
 		return (0);
 	(!*path) ? ft_memcpy(tmp, ".", 1) : ft_memcpy(tmp, path, ft_strlen(path));
-	if (ft_strcmp(name, "/") != 0)
+	if (ft_strcmp(path, "/") != 0)
 		ft_strcat(tmp, "/");
 	ft_strcat(tmp, name);
 	if (!(file->full_path = ft_strdup(tmp)))
@@ -75,5 +71,4 @@ void			ft_add_to_list(t_list **begin_list, char *name, char *path)
 	if (!(tmp = ft_lstnew(&file, sizeof(t_ls))))
 		ft_ls_error(NULL, ERRNO);
 	ft_lstadd(begin_list, tmp);
-	return ;
 }

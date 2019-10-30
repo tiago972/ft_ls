@@ -29,5 +29,4 @@ void			ft_dispatch_opt(t_list **begin_list, int opt)
 		ft_sort_time(begin_list, opt);
 	(opt & L_LS) ? ft_full_display(begin_list) 
 		: ft_simple_display(begin_list, opt, ft_max_len(begin_list, opt));
-	//ft_debog(begin_list);
 }

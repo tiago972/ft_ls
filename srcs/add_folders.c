@@ -16,8 +16,7 @@ static	t_list	*ft_readdir(t_ls *file, int opt)
 	{
 		if (dir_file->d_name[0] != '.')
 			ft_add_to_list(&begin_list, dir_file->d_name, file->full_path);
-		else if (dir_file->d_name[0] == '.' && (opt & A_LS)
-				&& ft_strcmp(dir_file->d_name, ".") != 0)
+		else if (dir_file->d_name[0] == '.' && (opt & A_LS))
 			ft_add_to_list(&begin_list, dir_file->d_name, file->full_path);
 	}
 	closedir(o_dir);
@@ -42,6 +41,7 @@ void			ft_rec_opening(t_list **begin_list, int opt, int start)
 		{
 			if ((new_folder = ft_readdir(ls_tmp, opt)))
 			{
+				ft_print_path(ls_tmp->full_path, opt, start);
 				ft_dispatch_opt(&new_folder, opt);
 				ft_rec_opening(&new_folder, opt, 0);
 				ft_clean_mem(&new_folder);

@@ -17,7 +17,10 @@ int		main(int ac, char **av)
 		ft_add_to_list(&begin_list, ".", "");
 	while (ac > 1 && *av)
 	{
-		ft_add_to_list(&begin_list, *av, "");
+		if (*av[0] == '/')
+			ft_add_to_list(&begin_list, "", *av);
+		else
+			ft_add_to_list(&begin_list, *av, "");
 		av++;
 	}
 	ft_rec_opening(&begin_list, opt, 1);
