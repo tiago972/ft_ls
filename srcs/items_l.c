@@ -2,7 +2,6 @@
 
 void	ft_type(t_ls *file)
 {
-	file->st_mode &= S_IFMT;
 	if (S_ISREG(file->st_mode))
 		ft_printf("-");
 	else if  (S_ISDIR(file->st_mode))
@@ -23,7 +22,6 @@ void	ft_type(t_ls *file)
 
 void	ft_rights(t_ls *file)
 {
-	file->st_mode ^= ~S_IFMT;
 	(S_IRUSR & file->st_mode) ? ft_printf("r") : ft_printf("-");
 	(S_IWUSR & file->st_mode) ? ft_printf("w") : ft_printf("-");
 	(S_IXUSR & file->st_mode) ? ft_printf("x") : ft_printf("-");
@@ -33,10 +31,32 @@ void	ft_rights(t_ls *file)
 	(S_IROTH & file->st_mode) ? ft_printf("r") : ft_printf("-");
 	(S_IWOTH & file->st_mode) ? ft_printf("w") : ft_printf("-");
 	(S_IXOTH & file->st_mode) ? ft_printf("x") : ft_printf("-");
-	ft_printf(" ");
+	//if ((S_ISCHR(file->st_mode) || S_ISBLK(file->st_mode)))
+	//	ft_printf(" ");
+	//else
+		ft_printf("  ");
 }
 
-void	ft_link_ug_size_time_name(t_ls *file)
+void	ft_link_ug_size_time_name(t_ls *file, t_list **begin_list)
 {
-	ft_printf("%-*u ", ft_max_links((unsigned)file->st_nlink);
+	int		max;
+
+	max = ft_max_links(begin_list);
+	ft_printf("%*d ", max, file->st_nlink);
+	max = ft_max_len_uid(begin_list);
+	ft_printf("%-*s ", max, getpwuid(file->st_uid)->pw_name);
+	max = ft_max_len_gid(begin_list);
+	ft_printf(" %-*s ", max, getgrgid(file->st_gid)->gr_name);
+	if ((S_ISCHR(file->st_mode) || S_ISBLK(file->st_mode)))
+	{
+		max = ft_max_major(begin_list);
+		ft_printf("  %*d,", max, major(file->st_rdev));
+		max = ft_max_minor(begin_list);
+		ft_printf(" %*d ", max, minor(file->st_rdev));
+	}
+	else
+	{
+		max = ft_max_size(begin_list);
+		ft_printf(" %*d ", max, file->st_size);
+	}
 }

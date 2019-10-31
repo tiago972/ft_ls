@@ -18,6 +18,9 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+ #include <grp.h>
 
 typedef struct			s_ls
 {
@@ -47,14 +50,20 @@ void					ft_rec_opening(t_list **begin_list, int opt, int start);
 void					ft_sort_ascii(t_list **begin_list, int opt);
 void					ft_sort_time(t_list **begin_list, int opt);
 void					ft_dispatch_opt(t_list **begin_list, int opt);
-int						ft_max_len(t_list **begin_list, int opt);
-void					ft_simple_display(t_list **begin_list, int opt,
-						int max_len);
+int						ft_max_len_name(t_list **begin_list);
+void					ft_simple_display(t_list **begin_list);
 void					ft_full_display(t_list **begin_list);
 void					ft_print_path(char *begin_list, int opt,
 						int start);
 void					ft_type(t_ls *file);
 void					ft_rights(t_ls *file);
-void					ft_link_ug_size_time_name(t_ls *file);
+void					ft_link_ug_size_time_name(t_ls *file,
+						t_list **begin_list);
+int						ft_max_links(t_list **begin_list);
+int						ft_max_len_uid(t_list **begin_list);
+int						ft_max_len_gid(t_list **begin_list);
+int						ft_max_size(t_list **begin_list);
+int						ft_max_major(t_list **begin_list);
+int						ft_max_minor(t_list **begin_list);
 void	ft_debog(t_list **begin_list);
 #endif

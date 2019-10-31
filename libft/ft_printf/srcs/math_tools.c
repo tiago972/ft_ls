@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 #include <limits.h>
-
+#include <stdio.h>
 uintmax_t		ft_log(uintmax_t nb, uintmax_t base)
 {
 	uintmax_t	power;

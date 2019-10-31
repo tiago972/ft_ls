@@ -12,6 +12,8 @@ SRC = main.c \
 	  list_sort.c \
 	  display.c \
 	  items_l.c \
+	  display_tools.c \
+	  display_tools_next.c \
 	  debog.c
 INCL = ./includes
 LIBCREATOR = $(addprefix $(LIBDIR)/, $(LIB))

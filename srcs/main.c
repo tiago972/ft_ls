@@ -8,6 +8,8 @@ int		main(int ac, char **av)
 	errno = EXIT_SUCCESS;
 	begin_list = NULL;
 	opt = 0;
+	// debog
+	 //opt = L_LS;
 	if (ac == 1)
 		ft_add_to_list(&begin_list, ".", "");
 	else
