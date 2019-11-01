@@ -26,8 +26,6 @@ int		main(int ac, char **av)
 	}
 	//debog
 	//	ft_debog(&begin_list);
-	(opt & L_LS) ? ft_full_display(&begin_list)
-		: ft_simple_display(&begin_list, 1);
 	ft_rec_opening(&begin_list, opt, 1);
 	ft_clean_mem(&begin_list);
 	return (errno == EXIT_SUCCESS ? EXIT_SUCCESS : EXIT_FAILURE);
