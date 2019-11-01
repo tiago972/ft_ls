@@ -1,6 +1,6 @@
 #include "../includes/ft_ls.h"
 
-void	ft_type(t_ls *file)
+void			ft_type(t_ls *file)
 {
 	if (S_ISREG(file->st_mode))
 		ft_printf("-");
@@ -20,7 +20,7 @@ void	ft_type(t_ls *file)
 		ft_printf("-");
 }
 
-void	ft_rights(t_ls *file)
+void			ft_rights(t_ls *file)
 {
 	(S_IRUSR & file->st_mode) ? ft_printf("r") : ft_printf("-");
 	(S_IWUSR & file->st_mode) ? ft_printf("w") : ft_printf("-");
@@ -37,26 +37,18 @@ void	ft_rights(t_ls *file)
 		ft_printf("  ");
 }
 
-void	ft_link_ug_size_time_name(t_ls *file, t_list **begin_list)
+void			ft_link_ug_size_time_name(t_ls *file, t_parse v_parse)
 {
-	int		max;
-
-	max = ft_max_links(begin_list);
-	ft_printf("%*d ", max, file->st_nlink);
-	max = ft_max_len_uid(begin_list);
-	ft_printf("%-*s ", max, getpwuid(file->st_uid)->pw_name);
-	max = ft_max_len_gid(begin_list);
-	ft_printf(" %-*s ", max, getgrgid(file->st_gid)->gr_name);
+	ft_printf("%*d ",v_parse.max_links, file->st_nlink);
+	ft_printf("%-*s ", v_parse.max_uid, getpwuid(file->st_uid)->pw_name);
+	ft_printf(" %-*s ", v_parse.max_gid, getgrgid(file->st_gid)->gr_name);
 	if ((S_ISCHR(file->st_mode) || S_ISBLK(file->st_mode)))
 	{
-		max = ft_max_major(begin_list);
-		ft_printf("  %*d,", max, major(file->st_rdev));
-		max = ft_max_minor(begin_list);
-		ft_printf(" %*d ", max, minor(file->st_rdev));
+		ft_printf("  %*d,", v_parse.max_major, major(file->st_rdev));
+		ft_printf(" %*d ", v_parse.max_minor, minor(file->st_rdev));
 	}
 	else
-	{
-		max = ft_max_size(begin_list);
-		ft_printf(" %*d ", max, file->st_size);
-	}
+		ft_printf(" %*d ", v_parse.max_size, file->st_size);
+	ft_printf(" %.12s ", ctime(&file->time) + 4);
+	ft_printf("%s", file->name);
 }

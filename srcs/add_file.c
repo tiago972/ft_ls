@@ -46,11 +46,7 @@ static void		ft_init_struct(t_ls *file, char *name)
 	if (!(file->name = ft_strdup(name)))
 		ft_ls_error(NULL, ERRNO);
 	if (lstat(file->full_path, &v_stat) == -1)
-	{
-		//debog
-		 ft_printf("ERROR\n");
 		ft_ls_error(name, ERRNO);
-	}
 	file->st_mode = v_stat.st_mode;
 	file->st_uid = v_stat.st_uid;
 	file->st_gid = v_stat.st_gid;

@@ -38,6 +38,17 @@ typedef struct			s_ls
 
 typedef struct	stat	t_stat;
 
+typedef struct			s_parse
+{
+	int		max_links;
+	int		max_uid;
+	int		max_gid;
+	int		max_major;
+	int		max_minor;
+	int		max_size;
+	int		max_name;
+}						t_parse;
+
 enum					{USAGE, ERRNO};
 int						ft_parse_opt(int ac, char **av, int *opt);
 void					ft_add_to_list(t_list **begin_list,
@@ -51,14 +62,14 @@ void					ft_sort_ascii(t_list **begin_list, int opt);
 void					ft_sort_time(t_list **begin_list, int opt);
 void					ft_dispatch_opt(t_list **begin_list, int opt);
 int						ft_max_len_name(t_list **begin_list);
-void					ft_simple_display(t_list **begin_list);
+void					ft_simple_display(t_list **begin_list, int start);
 void					ft_full_display(t_list **begin_list);
 void					ft_print_path(char *begin_list, int opt,
 						int start);
 void					ft_type(t_ls *file);
 void					ft_rights(t_ls *file);
-void					ft_link_ug_size_time_name(t_ls *file,
-						t_list **begin_list);
+void					ft_all_max(t_parse *v_parse, t_list **begin_list);
+void					ft_link_ug_size_time_name(t_ls *file, t_parse v_parse);
 int						ft_max_links(t_list **begin_list);
 int						ft_max_len_uid(t_list **begin_list);
 int						ft_max_len_gid(t_list **begin_list);
