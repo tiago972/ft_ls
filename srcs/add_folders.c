@@ -32,7 +32,13 @@ void			ft_rec_opening(t_list **begin_list, int opt, int start)
 	list_tmp = *begin_list;
 	new_folder = NULL;
 	if (!start && !(opt & REC_LS))
-		return ;
+		return ;	
+	ls_tmp = (t_ls *)list_tmp->content;
+	if (start && !(S_ISDIR(ls_tmp->st_mode)))
+	{
+		ft_print_path(((t_ls *)list_tmp->content)->full_path, opt, start);
+		ft_dispatch_opt(begin_list, opt);
+	}
 	while (list_tmp)
 	{
 		ls_tmp = (t_ls *)list_tmp->content;
